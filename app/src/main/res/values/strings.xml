@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">HelloWorldCPP1</string>
+    <string name="_100">100</string>
+    <string name="labelhello">labelHello</string>
+    <string name="sample_text">Hello</string>
+    <string name="incrementvalue">increment</string>
+    <string name="decrementvalue">decrement</string>
+    <string name="hint">100</string>
+    <string name="filltext">Buffer Overflow 5</string>
+</resources>
