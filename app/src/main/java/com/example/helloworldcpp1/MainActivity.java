@@ -364,12 +364,11 @@ public class MainActivity extends AppCompatActivity implements PictureCapturingL
             public void onClick(View v) {
 
                 Toast.makeText(getApplicationContext(),
-                        "UAF Value: "+socketclient1(),
+                        "UAF Value: "+socketclientmulti1(),
                         Toast.LENGTH_LONG).show();
 
             }
         });
-
 
 
     }
@@ -386,6 +385,8 @@ public class MainActivity extends AppCompatActivity implements PictureCapturingL
     public native String filltext(String inputValue1);
     public native String basicuaf1();
     public native String socketclient1();
-
+    public native String socketserver1();
+    public native String fileoperation1();
+    public native String socketclientmulti1();
 
 }
