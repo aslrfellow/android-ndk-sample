@@ -41,6 +41,8 @@
 
 #include "transfer.h"
 
+
+
 //https://github.com/omair18/Socket-Programming-in-C/blob/master/receive_file.c
 
 void writefile(int sockfd, FILE *fp);
@@ -48,6 +50,10 @@ void sendfullfile(FILE *fp, int sockfd);
 void listsdcarddir();
 
 ssize_t total=0;
+
+extern "C" {
+    #include "helloWorld.h"
+}
 
 extern "C"
 JNIEXPORT jstring
@@ -63,67 +69,76 @@ Java_com_example_helloworldcpp1_MainActivity_socketclientmultifile1(
 
     __android_log_print(ANDROID_LOG_VERBOSE, APPNAME, "socket client multifile start");
 
-    char input_filename[200] = {0};
-    sprintf(input_filename,"%s/%s", "/sdcard/Pictures/CameraDemo", str);
 
-    //char input_filename[200] = "/sdcard/Pictures/CameraDemo/2_pic.jpg";
-    char input_hostname[200] = "192.168.0.210";
+//    char input_filename[200] = {0};
+//    sprintf(input_filename,"%s/%s", "/sdcard/Pictures/CameraDemo", str);
+//
+//    //char input_filename[200] = "/sdcard/Pictures/CameraDemo/2_pic.jpg";
+//    char input_hostname[200] = "192.168.0.210";
+//
+//    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+//    if (sockfd < 0)
+//    {
+//        perror("Can't allocate sockfd");
+//        exit(1);
+//    }
+//
+//    struct sockaddr_in serveraddr;
+//    memset(&serveraddr, 0, sizeof(serveraddr));
+//    serveraddr.sin_family = AF_INET;
+//    serveraddr.sin_port = htons(SERVERPORT);
+//    if (inet_pton(AF_INET, input_hostname, &serveraddr.sin_addr) < 0)
+//    {
+//        perror("IPaddress Convert Error");
+//        exit(1);
+//    }
+//
+//    if (connect(sockfd, (const struct sockaddr *) &serveraddr, sizeof(serveraddr)) < 0)
+//    {
+//        perror("Connect Error");
+//        exit(1);
+//    }
+//
+//    char *filename = basename(input_filename);
+//    if (filename == NULL)
+//    {
+//        perror("Can't get filename");
+//        exit(1);
+//    }
+//
+//    char buff[BUFFSIZE] = {0};
+//    strncpy(buff, filename, strlen(filename));
+//    if (send(sockfd, buff, BUFFSIZE, 0) == -1)
+//    {
+//        perror("Can't send filename");
+//        exit(1);
+//    }
+//
+//    FILE *fp = fopen(input_filename, "rb");
+//    if (fp == NULL)
+//    {
+//        perror("Can't open file");
+//        exit(1);
+//    }
+//
+//    sendfullfile(fp, sockfd);
+//    //puts("Send Success");
+//    printf("Send Success, NumBytes = %ld\n", total);
+//    __android_log_print(ANDROID_LOG_VERBOSE, APPNAME, "Send Success, NumBytes = %ld\n", total);
+//    fclose(fp);
+//    close(sockfd);
+//
+//    __android_log_print(ANDROID_LOG_VERBOSE, APPNAME, "socket client multifile end");
 
-    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd < 0)
-    {
-        perror("Can't allocate sockfd");
-        exit(1);
-    }
+    hello();
+    char *s = NULL;
+    s = (char *)malloc(100);
+    sprintf(s, "tomato");
+    char *out = sayIt(s);
+    std::string result = out;
+    __android_log_print(ANDROID_LOG_VERBOSE, APPNAME, "output is %s", out);
 
-    struct sockaddr_in serveraddr;
-    memset(&serveraddr, 0, sizeof(serveraddr));
-    serveraddr.sin_family = AF_INET;
-    serveraddr.sin_port = htons(SERVERPORT);
-    if (inet_pton(AF_INET, input_hostname, &serveraddr.sin_addr) < 0)
-    {
-        perror("IPaddress Convert Error");
-        exit(1);
-    }
-
-    if (connect(sockfd, (const struct sockaddr *) &serveraddr, sizeof(serveraddr)) < 0)
-    {
-        perror("Connect Error");
-        exit(1);
-    }
-
-    char *filename = basename(input_filename);
-    if (filename == NULL)
-    {
-        perror("Can't get filename");
-        exit(1);
-    }
-
-    char buff[BUFFSIZE] = {0};
-    strncpy(buff, filename, strlen(filename));
-    if (send(sockfd, buff, BUFFSIZE, 0) == -1)
-    {
-        perror("Can't send filename");
-        exit(1);
-    }
-
-    FILE *fp = fopen(input_filename, "rb");
-    if (fp == NULL)
-    {
-        perror("Can't open file");
-        exit(1);
-    }
-
-    sendfullfile(fp, sockfd);
-    //puts("Send Success");
-    printf("Send Success, NumBytes = %ld\n", total);
-    __android_log_print(ANDROID_LOG_VERBOSE, APPNAME, "Send Success, NumBytes = %ld\n", total);
-    fclose(fp);
-    close(sockfd);
-
-    __android_log_print(ANDROID_LOG_VERBOSE, APPNAME, "socket client multifile end");
-
-    std::string result = "Socket multifile send!";
+    //std::string result = "Socket multifile send!";
     env->ReleaseStringUTFChars(inputValue1, str);
     return env->NewStringUTF(result.c_str());
 

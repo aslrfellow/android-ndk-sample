@@ -32,6 +32,13 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
+
+    sourceSets {
+        main {
+            // let gradle pack the shared library into apk
+            jniLibs.srcDirs = ['/Users/oketo/AndroidStudioProjects/HelloWorldCPP1/app/src/main/cpp/helloworld/lib']
+        }
+    }
 }
 
 dependencies {

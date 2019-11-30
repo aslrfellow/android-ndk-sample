@@ -10,6 +10,21 @@ cmake_minimum_required(VERSION 3.4.1)
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
+# set(helloworld_DIR ${CMAKE_SOURCE_DIR}/src/main/cpp/helloworld)
+
+# add_library(HelloWorld SHARED IMPORTED)
+
+# set_target_properties(HelloWorld PROPERTIES IMPORTED_LOCATION
+#        ${helloworld_DIR}/lib/${ANDROID_ABI}/libHelloWorld.so)
+
+# include_directories(${helloworld_DIR}/lib/${ANDROID_ABI}/include)
+
+include_directories(/Users/oketo/AndroidStudioProjects/HelloWorldCPP1/app/src/main/cpp/helloworld/lib/arm64-v8a/include)
+
+add_library( HelloWorld SHARED IMPORTED )
+
+set_target_properties( HelloWorld PROPERTIES IMPORTED_LOCATION /Users/oketo/AndroidStudioProjects/HelloWorldCPP1/app/src/main/cpp/helloworld/lib/arm64-v8a/libHelloWorld.so)
+
 add_library( # Sets the name of the library.
         native-lib
 
@@ -53,9 +68,13 @@ target_link_libraries( # Specifies the target library.
         # included in the NDK.
         ${log-lib})
 
+
+
 target_link_libraries( # Specifies the target library.
         multifile-transfer-lib
 
         # Links the target library to the log library
         # included in the NDK.
-        ${log-lib})
+        ${log-lib}
+        HelloWorld
+        )
